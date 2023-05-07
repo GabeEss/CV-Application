@@ -13,6 +13,7 @@ const Education = (props) => {
                   name="institutionName"
                   placeholder="Institution name"
                   className="input-field"
+                  required
                 />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
@@ -21,6 +22,7 @@ const Education = (props) => {
                 name="city"
                 placeholder="City"
                 className="input-field"
+                required
               />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
@@ -29,6 +31,7 @@ const Education = (props) => {
                 name="country"
                 placeholder="Country"
                 className="input-field"
+                required
               />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
@@ -37,6 +40,7 @@ const Education = (props) => {
                 name="degree"
                 placeholder="Degree"
                 className="input-field"
+                required
               />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
@@ -45,6 +49,7 @@ const Education = (props) => {
                 name="majorSubject"
                 placeholder="Major subject"
                 className="input-field"
+                required
               />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
@@ -55,6 +60,7 @@ const Education = (props) => {
                 className="input-field"
                 min="1900"
                 max={new Date().getFullYear()}
+                required
               />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}

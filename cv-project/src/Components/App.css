@@ -25,6 +25,7 @@ h2 {
 
   input[type="text"],
 input[type="email"],
+input[type="number"],
 textarea {
   width: 100%;
   padding: 10px;

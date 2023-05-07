@@ -13,6 +13,7 @@ const Experience = (props) => {
             name="position"
             placeholder="Position"
             className="input-field"
+            required
             />
         <input 
             onChange={(e) => props.handleChange(e, "experience")}
@@ -21,6 +22,7 @@ const Experience = (props) => {
             name="company"
             placeholder="Company"
             className="input-field"
+            required
             />
         <input 
             onChange={(e) => props.handleChange(e, "experience")}
@@ -29,6 +31,7 @@ const Experience = (props) => {
             name="city"
             placeholder="City"
             className="input-field"
+            required
             />
         <input 
             onChange={(e) => props.handleChange(e, "experience")}
@@ -37,6 +40,7 @@ const Experience = (props) => {
             name="country"
             placeholder="Country"
             className="input-field"
+            required
             />
         <input 
             onChange={(e) => props.handleChange(e, "experience")}
@@ -45,9 +49,9 @@ const Experience = (props) => {
             name="startYear"
             placeholder="Start year"
             className="input-field"
-            required
             min="1900"
             max={new Date().getFullYear()}
+            required
             />
             <input 
             onChange={(e) => props.handleChange(e, "experience")}
@@ -56,7 +60,6 @@ const Experience = (props) => {
             name="endYear"
             placeholder="End year"
             className="input-field"
-            required
             min="1900"
             max={new Date().getFullYear()}
             />
