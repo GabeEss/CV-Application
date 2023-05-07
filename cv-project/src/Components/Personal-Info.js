@@ -13,6 +13,7 @@ const Personal = (props) => {
                 name="firstName"
                 placeholder="First name"
                 className="input-field"
+                required
             />
             <input 
                 onChange={(e) => props.handleChange(e, "personalInfo")}
@@ -21,6 +22,7 @@ const Personal = (props) => {
                 name="lastName"
                 placeholder="Last name"
                 className="input-field"
+                required
             />
             <input 
                 onChange={(e) => props.handleChange(e, "personalInfo")}
@@ -29,22 +31,27 @@ const Personal = (props) => {
                 name="address"
                 placeholder="Address"
                 className="input-field"
+                required
             />
             <input 
                 onChange={(e) => props.handleChange(e, "personalInfo")}
                 value={personalInfo.phoneNumber}
-                type="text"
+                type="number"
                 name="phoneNumber"
                 placeholder="Phone number"
                 className="input-field"
+                min="1000000000"
+                max="9999999999"
+                required
             />
             <input 
                 onChange={(e) => props.handleChange(e, "personalInfo")}
                 value={personalInfo.email}
-                type="text"
+                type="email"
                 name="email"
                 placeholder="Email"
                 className="input-field"
+                required
             />
             <input 
                 onChange={(e) => props.handleChange(e, "personalInfo")}

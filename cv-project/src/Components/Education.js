@@ -49,18 +49,22 @@ const Education = (props) => {
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
                 value={education.startYear}
-                type="text"
+                type="number"
                 name="startYear"
                 placeholder="Start year"
                 className="input-field"
+                min="1900"
+                max={new Date().getFullYear()}
               />
             <input 
                 onChange={(e) => props.handleChange(e, "education")}
                 value={education.endYear}
-                type="text"
+                type="number"
                 name="endYear"
                 placeholder="End year"
                 className="input-field"
+                min="1900"
+                max={new Date().getFullYear()}
               />
           </div>
     );
