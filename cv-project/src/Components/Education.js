@@ -1,4 +1,5 @@
 import React from "react";
+import './Form.css';
 
 const Education = (props) => {
     const { education } = props;

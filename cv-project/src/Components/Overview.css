@@ -1,0 +1,17 @@
+#application{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+}
+
+.cv-field {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.cv-field label {
+    margin-right: 10px;
+    width: 100px;
+}

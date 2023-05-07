@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './App.css';
 // import uniqid from 'uniqid';
 import Overview from "./Overview";
 import Personal from "./Personal-Info";
@@ -143,7 +144,7 @@ class App extends Component {
     const { tasks } = this.state;
     if (tasks.length > 0) {
       return (
-        <div>
+        <div id="cv-application">
           <Overview tasks={tasks} />
           <button onClick={this.handleReset}>
               Reset
@@ -153,19 +154,22 @@ class App extends Component {
     } else {
       return (
         <div>
-          <form onSubmit={this.onSubmitTask}>
+          <h1>CV Creator</h1>
+          <form className="user-form" onSubmit={this.onSubmitTask}>
             <h2>Personal Information</h2>
-              <Personal personalInfo={this.state.personalInfo} handleChange={this.handleChange} />
+              <Personal personalInfo={this.state.personalInfo} handleChange={this.handleChange}/>
             <h2>Relevant Experience</h2>
               <Experience experience={this.state.experience} handleChange={this.handleChange} />
             <h2>Education</h2>
               <Education education={this.state.education} handleChange={this.handleChange} />
-            <button type="submit">
-              Submit CV
-            </button>
-            <button onClick={this.handleReset}>
-              Reset
-            </button>
+            <div className="button-group">
+              <button type="submit">
+                Submit CV
+              </button>
+              <button onClick={this.handleReset}>
+                Reset
+              </button>
+            </div>
           </form>
         </div>
       );

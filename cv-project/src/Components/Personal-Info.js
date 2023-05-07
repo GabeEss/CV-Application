@@ -1,4 +1,5 @@
 import React from "react";
+import './Form.css';
 
 const Personal = (props) => {
     const { personalInfo } = props;
