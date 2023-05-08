@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 // import uniqid from 'uniqid';
 import Overview from "./Overview";
@@ -6,167 +6,159 @@ import Personal from "./Personal-Info";
 import Experience from "./Experience";
 import Education from "./Education";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [personalInfo, setPersonalInfo] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    phoneNumber: "",
+    email: "",
+    description: "",
+  });
 
-    this.state = {
-      personalInfo: { 
-        firstName: '',
-        lastName: '',
-        address: '',
-        phoneNumber: '',
-        email: '',
-        description: ''
-      },
-      experience: {
-        position: '',
-        company: '',
-        city: '',
-        country: '',
-        startYear: '',
-        endYear: ''
-      },
-      education: {
-        institutionName: '',
-        city: '',
-        country: '',
-        degree: '',
-        majorSubject: '',
-        startYear: '',
-        endYear: ''
-      },
-      tasks: [],
-    };
+  const [experience, setExperience] = useState({
+    position: "",
+    company: "",
+    city: "",
+    country: "",
+    startYear: "",
+    endYear: "",
+  });
 
-    // Didn't use an arrow function in the render method, so handleReset needs binding.
-    this.handleReset = this.handleReset.bind(this);
-  }
+  const [education, setEducation] = useState({
+    institutionName: "",
+    city: "",
+    country: "",
+    degree: "",
+    majorSubject: "",
+    startYear: "",
+    endYear: "",
+  });
 
+  const [tasks, setTasks] = useState([]);
 
-  // This method changes the text inside the input fields of the form when the user types.
-  // 'e' is the event, e.target is the element.
-  // 'section' is a string. It is equivalent to one of the properties declared in the constructor.
-  // First this function takes the name and value from the input element (declared in jsx/html)
-  // and intializes them as variables.
-  // Then we call setState and pass the previous state (object) into it. In the string
-  // called 'section' which was passed into this method, we use the spread operator:
-  // '...prevState[section]' to copy all the contents of the previous state (object).
-  // Note that the wording in 'section' must correspond to a property in this.state in the constructor.
-  // The one thing that gets changed is a subproperty of the section, which corresponds
-  // to the name value, which was destructured from e.target. If it does not, you need to
-  // look at the jsx(html) in the render method and make sure the input element's 'name' value
-  // corresponds to the subproperties initialized by this.state in your constructor, otherwise
-  // the value in those subproperties won't be updated. AGAIN, The input element's 'name' is not what
-  // changes, the element's name (declared in jsx in the render method) is only supposed to match the
-  // subproperties initialized by the constructor in this.state,
-  // the properties of the state are what get updated in this method.
-  handleChange = (e, section) => {
+  const handleChange = (e, section) => {
     const { name, value } = e.target;
-    this.setState(prevState => ({
-      [section]: {
-        ...prevState[section],
-        [name]: value
-      }
-    }));
-  } 
 
-  handleReset = (e) => {
+    switch (section) {
+      case "personalInfo":
+        setPersonalInfo((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+        break;
+      case "experience":
+        setExperience((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+        break;
+      case "education":
+        setEducation((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleReset = (e) => {
     e.preventDefault();
-    this.setState({
-      tasks: [],
-      personalInfo: { 
-        firstName: '',
-        lastName: '',
-        address: '',
-        phoneNumber: '',
-        email: '',
-        description: ''
-      },
-      experience: {
-        position: '',
-        company: '',
-        city: '',
-        country: '',
-        startYear: '',
-        endYear: ''
-      },
-      education: {
-        institutionName: '',
-        city: '',
-        country: '',
-        degree: '',
-        majorSubject: '',
-        startYear: '',
-        endYear: ''
-      }
-    })
-  }
+    setTasks([]);
+    setPersonalInfo({
+      firstName: "",
+      lastName: "",
+      address: "",
+      phoneNumber: "",
+      email: "",
+      description: "",
+    });
+    setExperience({
+      position: "",
+      company: "",
+      city: "",
+      country: "",
+      startYear: "",
+      endYear: "",
+    });
+    setEducation({
+      institutionName: "",
+      city: "",
+      country: "",
+      degree: "",
+      majorSubject: "",
+      startYear: "",
+      endYear: "",
+    });
+  };
 
-  onSubmitTask = (e) => {
+  const onSubmitTask = (e) => {
     e.preventDefault();
-    const { personalInfo, experience, education } = this.state;
-    this.setState({
-      tasks: [
-        ...this.state.tasks,
-        { personalInfo, experience, education }
-      ],
-      personalInfo: { 
-        firstName: '',
-        lastName: '',
-        address: '',
-        phoneNumber: '',
-        email: '',
-        description: ''
+    setTasks([
+      ...tasks,
+      {
+        personalInfo,
+        experience,
+        education,
       },
-      experience: {
-        position: '',
-        company: '',
-        city: '',
-        country: '',
-        startYear: '',
-        endYear: ''
-      },
-      education: {
-        institutionName: '',
-        city: '',
-        country: '',
-        degree: '',
-        majorSubject: '',
-        startYear: '',
-        endYear: ''
-      }
-    })
-  }
+    ]);
+    setPersonalInfo({
+      firstName: "",
+      lastName: "",
+      address: "",
+      phoneNumber: "",
+      email: "",
+      description: "",
+    });
+    setExperience({
+      position: "",
+      company: "",
+      city: "",
+      country: "",
+      startYear: "",
+      endYear: "",
+    });
+    setEducation({
+      institutionName: "",
+      city: "",
+      country: "",
+      degree: "",
+      majorSubject: "",
+      startYear: "",
+      endYear: "",
+    });
+  };
 
-  // If the tasks property is not empty, render the CV, else render the form.
-  render() {
-    const { tasks } = this.state;
-    if (tasks.length > 0) {
-      return (
+  if (tasks.length > 0) {
+      return(
         <div id="cv-application">
           <Overview tasks={tasks} />
-          <button onClick={this.handleReset}>
+          <button onClick={handleReset}>
               Reset
             </button>
         </div>
       );
     } else {
-      return (
+      return(
         <div>
           <h1>CV Creator</h1>
-          <form className="user-form" onSubmit={this.onSubmitTask}>
+          <form className="user-form" onSubmit={onSubmitTask}>
             <h2>Personal Information</h2>
-              <Personal personalInfo={this.state.personalInfo} handleChange={this.handleChange}/>
+              <Personal personalInfo={personalInfo}
+              handleChange= {(e) => handleChange(e, "personalInfo")}/>
             <h2>Relevant Experience</h2>
-              <Experience experience={this.state.experience} handleChange={this.handleChange} />
+              <Experience experience={experience}
+              handleChange= {(e) => handleChange(e, "experience")} />
             <h2>Education</h2>
-              <Education education={this.state.education} handleChange={this.handleChange} />
+              <Education education={education}
+              handleChange= {(e) => handleChange(e, "education")} />
             <div className="button-group">
               <button type="submit">
                 Submit CV
               </button>
-              <button onClick={this.handleReset}>
+              <button onClick={handleReset}>
                 Reset
               </button>
             </div>
@@ -174,7 +166,5 @@ class App extends Component {
         </div>
       );
     }
-  }
-};
-
+}
 export default App;
